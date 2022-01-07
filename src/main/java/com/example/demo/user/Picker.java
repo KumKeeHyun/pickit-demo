@@ -11,8 +11,9 @@ import javax.persistence.Id;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+public class Picker {
     @Id
     private Long id;
+
     private String name;
 }
