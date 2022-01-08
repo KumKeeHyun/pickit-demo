@@ -24,6 +24,7 @@ public class CommentDto {
 
         public static List<Response> ofList(List<Comment> comments) {
             return comments.stream().map(Response::of).collect(Collectors.toList());
+
         }
     }
 }
