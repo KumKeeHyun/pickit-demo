@@ -17,14 +17,20 @@ import java.util.List;
 @AllArgsConstructor
 public class Article {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String content;
 
-    @CreatedBy
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn
     private Picker createdBy;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "article")
     List<Pick> picks = new ArrayList<>();
+
+    public Article(String content, Picker createdBy) {
+        this.content = content;
+        this.createdBy = createdBy;
+    }
 }
