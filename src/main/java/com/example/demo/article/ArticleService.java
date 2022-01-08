@@ -1,5 +1,6 @@
 package com.example.demo.article;
 
+import com.example.demo.comment.Comment;
 import com.example.demo.item.Item;
 import com.example.demo.item.ItemRepository;
 import com.example.demo.user.Picker;
