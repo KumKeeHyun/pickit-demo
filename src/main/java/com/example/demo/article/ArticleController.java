@@ -25,11 +25,11 @@ public class ArticleController {
         return ArticleDto.Response.ofList(articleService.getAllArticles());
     }
 
-    @GetMapping("/{articleId}/pick/{pickId}")
+    @GetMapping("/{articleId}/pick/{itemId}")
     @Transactional
-    public String pick(@PathVariable Long articleId, @PathVariable Long pickId) throws Exception {
+    public String pick(@PathVariable Long articleId, @PathVariable Long itemId) throws Exception {
         Picker kim = pickerRepository.findByName("Kim").get();
-        articleService.pick(articleId, pickId, kim);
+        articleService.pick(articleId, itemId, kim);
         return "success";
     }
 }

@@ -1,6 +1,6 @@
 package com.example.demo.article;
 
-import com.example.demo.pick.PickDto;
+import com.example.demo.item.ItemDto;
 import com.example.demo.user.PickerDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,13 +18,13 @@ public class ArticleDto {
         private Long id;
         private String content;
         private PickerDto.Response createdBy;
-        private List<PickDto.Response> picks;
+        private List<ItemDto.Response> items;
 
         public static Response of(Article article) {
             return new Response(article.getId(),
                     article.getContent(),
                     PickerDto.Response.of(article.getCreatedBy()),
-                    PickDto.Response.ofList(article.getPicks()));
+                    ItemDto.Response.ofList(article.getItems()));
         }
 
         public static List<Response> ofList(List<Article> articles) {

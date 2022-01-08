@@ -11,12 +11,12 @@ import javax.transaction.Transactional;
 @AllArgsConstructor
 public class PickEventHandler {
 
-    private final PickerPickRepository pickerPickRepository;
+    private final PickRepository pickRepository;
 
     @Async
     @EventListener
     @Transactional
     public void handle(PickEvent event) {
-        pickerPickRepository.save(new PickerPick(event.getPicker(), event.getPick()));
+        pickRepository.save(new Pick(event.getArticle(), event.getPicker(), event.getItem()));
     }
 }

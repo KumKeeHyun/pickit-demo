@@ -2,7 +2,7 @@ package com.example.demo;
 
 import com.example.demo.article.Article;
 import com.example.demo.article.ArticleRepository;
-import com.example.demo.pick.Pick;
+import com.example.demo.item.Item;
 import com.example.demo.user.Picker;
 import com.example.demo.user.PickerRepository;
 import org.springframework.boot.CommandLineRunner;
@@ -36,9 +36,9 @@ public class DemoApplication implements CommandLineRunner {
         pickerRepository.saveAll(pickers);
 
         Article article = Article.builder().content("BDRZ").createdBy(pickers.get(0)).build();
-        article.addPick(Pick.builder().content("침착맨").build());
-        article.addPick(Pick.builder().content("옥냥이").build());
-        article.addPick(Pick.builder().content("철면수심").build());
+        article.addItem(Item.builder().content("침착맨").build());
+        article.addItem(Item.builder().content("옥냥이").build());
+        article.addItem(Item.builder().content("철면수심").build());
         articleRepository.save(article);
 
     }

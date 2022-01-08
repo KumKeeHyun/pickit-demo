@@ -1,17 +1,17 @@
 package com.example.demo.pick;
 
+import com.example.demo.article.Article;
+import com.example.demo.item.Item;
 import com.example.demo.user.Picker;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+@AllArgsConstructor
 @Getter
 public class PickEvent {
 
-    private final Pick pick;
+    private final Article article;
     private final Picker picker;
-
-    public PickEvent(Pick pick, Picker picker) {
-        this.pick = pick;
-        this.picker = picker;
-    }
+    private final Item item;
 
 }

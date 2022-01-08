@@ -1,7 +1,7 @@
 package com.example.demo.article;
 
-import com.example.demo.pick.Pick;
-import com.example.demo.pick.PickRepository;
+import com.example.demo.item.Item;
+import com.example.demo.item.ItemRepository;
 import com.example.demo.user.Picker;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,24 +15,21 @@ import java.util.List;
 public class ArticleService {
 
     private final ArticleRepository articleRepository;
-    private final PickRepository pickRepository;
+    private final ItemRepository itemRepository;
 
     public List<Article> getAllArticles() {
         return articleRepository.findAll();
     }
 
-    public void pick(Long articleId, Long pickId, Picker picker) throws Exception {
+    public void pick(Long articleId, Long itemId, Picker picker) throws Exception {
         Article article = articleRepository.findById(articleId)
                 .orElseThrow(() -> new Exception("cannot find article"));
 
-        Pick pick = pickRepository.findById(pickId)
+        Item item = itemRepository.findById(itemId)
                 .orElseThrow(() -> new Exception("cannot find pick"));
 
-        article.getPicks().stream()
-                .filter(p -> p.getId() == pickId)
-                .findFirst()
-                .orElseThrow(() -> new Exception("cannot find pick"));
-
+        article.pick(picker, item);
+        articleRepository.save(article);
     }
 
 }
