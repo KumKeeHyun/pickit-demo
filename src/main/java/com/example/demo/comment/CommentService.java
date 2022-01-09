@@ -2,6 +2,7 @@ package com.example.demo.comment;
 
 import com.example.demo.article.Article;
 import com.example.demo.article.ArticleRepository;
+import com.example.demo.pick.Pick;
 import com.example.demo.pick.PickId;
 import com.example.demo.pick.PickRepository;
 import com.example.demo.user.Picker;
@@ -16,7 +17,6 @@ import java.util.List;
 @AllArgsConstructor
 public class CommentService {
 
-    private final ArticleRepository articleRepository;
     private final CommentRepository commentRepository;
     private final PickRepository pickRepository;
 
@@ -29,23 +29,22 @@ public class CommentService {
     }
 
     public Comment commentToArticle(Long articleId, Picker picker) throws Exception {
-        checkPickerPicked(articleId, picker.getId());
+        Pick pick = checkPickerPicked(articleId, picker.getId());
 
-        return commentRepository.save(new Comment("와! 배도라지 아시는구나!", articleId, picker));
+        return commentRepository.save(new Comment("와! 배도라지 아시는구나!", articleId, pick.getItem().getId(), picker));
     }
 
     public Comment commentToComment(Long articleId, Long commentId, Picker picker) throws Exception {
-        checkPickerPicked(articleId, picker.getId());
+        Pick pick = checkPickerPicked(articleId, picker.getId());
 
         Comment comment = commentRepository
                 .findById(commentId)
                 .orElseThrow(() -> new Exception("cannot find comment"));
-
-        return commentRepository.save(new Comment("와! 배도라지 아시는구나!", articleId, picker, comment));
+        return commentRepository.save(new Comment("와! 배도라지 아시는구나!", articleId, pick.getItem().getId(), picker, comment));
     }
 
-    public void checkPickerPicked(Long articleId, Long pickerId) throws Exception {
-        pickRepository.findById(new PickId(articleId, pickerId))
+    public Pick checkPickerPicked(Long articleId, Long pickerId) throws Exception {
+        return pickRepository.findById(new PickId(articleId, pickerId))
                 .orElseThrow(() -> new Exception("comment only when pick some item"));
     }
 }

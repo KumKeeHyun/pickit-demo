@@ -1,12 +1,10 @@
 package com.example.demo.comment;
 
-import com.example.demo.article.Article;
 import com.example.demo.user.Picker;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.CreatedBy;
 
 import javax.persistence.*;
 
@@ -24,6 +22,8 @@ public class Comment {
 
     private Long articleId;
 
+    private Long itemId;
+
     @ManyToOne
     @JoinColumn
     private Picker createdBy;
@@ -32,12 +32,12 @@ public class Comment {
     @JoinColumn
     private Comment parentComment;
 
-    public Comment(String content, Long articleId, Picker createdBy) {
-        this(content, articleId, createdBy, null);
+    public Comment(String content, Long articleId, Long itemId, Picker createdBy) {
+        this(content, articleId, itemId, createdBy, null);
     }
 
     @Builder
-    public Comment(String content, Long articleId, Picker createdBy, Comment parentComment) {
-        this(null, content, articleId, createdBy, parentComment);
+    public Comment(String content, Long articleId, Long itemId, Picker createdBy, Comment parentComment) {
+        this(null, content, articleId, itemId, createdBy, parentComment);
     }
 }

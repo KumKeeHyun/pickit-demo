@@ -35,11 +35,14 @@ public class DemoApplication implements CommandLineRunner {
                 new Picker("Park"));
         pickerRepository.saveAll(pickers);
 
-        Article article = Article.builder().content("BDRZ").createdBy(pickers.get(0)).build();
-        article.addItem(Item.builder().content("침착맨").build());
-        article.addItem(Item.builder().content("옥냥이").build());
-        article.addItem(Item.builder().content("철면수심").build());
-        articleRepository.save(article);
+        for (int i = 0; i < 20; i++) {
+            Article article = Article.builder().content("BDRZ" + i).createdBy(pickers.get(0)).build();
+            article.addItem(Item.builder().content("침착맨").build());
+            article.addItem(Item.builder().content("옥냥이").build());
+            article.addItem(Item.builder().content("철면수심").build());
+            articleRepository.save(article);
+        }
+
 
     }
 }

@@ -1,6 +1,7 @@
 package com.example.demo.article;
 
 import com.example.demo.item.ItemDto;
+import com.example.demo.pick.Pick;
 import com.example.demo.user.PickerDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,21 +15,31 @@ public class ArticleDto {
     @Data
     @AllArgsConstructor
     @NoArgsConstructor
-    public static class Response {
+    public static class UserResponse {
         private Long id;
         private String content;
         private PickerDto.Response createdBy;
         private List<ItemDto.Response> items;
 
-        public static Response of(Article article) {
-            return new Response(article.getId(),
+        private Boolean picked;
+        private Long pickedItemId;
+
+        public static UserResponse of(Article article) {
+            return new UserResponse(article.getId(),
                     article.getContent(),
                     PickerDto.Response.of(article.getCreatedBy()),
-                    ItemDto.Response.ofList(article.getItems()));
+                    ItemDto.Response.ofList(article.getItems()),
+                    false,
+                    null);
         }
 
-        public static List<Response> ofList(List<Article> articles) {
-            return articles.stream().map(Response::of).collect(Collectors.toList());
+        public static UserResponse of(Article article, Pick pick) {
+            return new UserResponse(article.getId(),
+                    article.getContent(),
+                    PickerDto.Response.of(article.getCreatedBy()),
+                    ItemDto.Response.ofList(article.getItems()),
+                    true,
+                    pick.getItem().getId());
         }
     }
 }

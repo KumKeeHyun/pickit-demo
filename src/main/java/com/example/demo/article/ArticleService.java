@@ -3,12 +3,18 @@ package com.example.demo.article;
 import com.example.demo.comment.Comment;
 import com.example.demo.item.Item;
 import com.example.demo.item.ItemRepository;
+import com.example.demo.pick.Pick;
+import com.example.demo.pick.PickRepository;
 import com.example.demo.user.Picker;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -17,9 +23,22 @@ public class ArticleService {
 
     private final ArticleRepository articleRepository;
     private final ItemRepository itemRepository;
+    private final PickRepository pickRepository;
 
-    public List<Article> getAllArticles() {
-        return articleRepository.findAll();
+    public Page<ArticleDto.UserResponse> findArticles(Pageable pageable, Picker picker) {
+        Page<Article> articles = articleRepository.findAll(pageable);
+        List<Long> ids = articles.stream().map(Article::getId).collect(Collectors.toList());
+        List<Pick> picks = pickRepository.findByArticleIdInAndPickerId(ids, picker.getId());
+
+        return articles.map(a -> {
+            Optional<Pick> pick = picks.stream()
+                    .filter(p -> p.getArticle().getId().equals(a.getId()))
+                    .findAny();
+            if (pick.isPresent())
+                return ArticleDto.UserResponse.of(a, pick.get());
+            else
+                return ArticleDto.UserResponse.of(a);
+        });
     }
 
     public void pick(Long articleId, Long itemId, Picker picker) throws Exception {

@@ -16,10 +16,14 @@ public class CommentDto {
     public static class Response {
         private Long id;
         private String content;
+        private Long itemId;
         private PickerDto.Response createdBy;
 
         public static Response of(Comment comment) {
-            return new Response(comment.getId(), comment.getContent(), PickerDto.Response.of(comment.getCreatedBy()));
+            return new Response(comment.getId(),
+                    comment.getContent(),
+                    comment.getItemId(),
+                    PickerDto.Response.of(comment.getCreatedBy()));
         }
 
         public static List<Response> ofList(List<Comment> comments) {
