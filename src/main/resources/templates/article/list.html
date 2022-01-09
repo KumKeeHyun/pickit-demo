@@ -39,7 +39,7 @@
             article.appendChild(header);
 
             const itemSlide = document.createElement('div');
-            itemSlide.id = 'itemSlide';
+            itemSlide.id = 'itemSlide-' + data.id;
             itemSlide.className = 'carousel slide';
             itemSlide.setAttribute('data-ride', 'carousel');
 
@@ -64,7 +64,7 @@
 
             const controlPrev = document.createElement('a');
             controlPrev.className = 'carousel-control-prev';
-            controlPrev.href = '#itemSlide';
+            controlPrev.href = '#' + itemSlide.id;
             controlPrev.setAttribute('role', 'button');
             controlPrev.setAttribute('data-slide', 'prev');
             const prevIcon = document.createElement('span');
@@ -79,7 +79,7 @@
 
             const controlNext = document.createElement('a');
             controlNext.className = 'carousel-control-next';
-            controlNext.href = '#itemSlide';
+            controlNext.href = '#' + itemSlide.id;
             controlNext.setAttribute('role', 'button');
             controlNext.setAttribute('data-slide', 'next');
             const nextIcon = document.createElement('span');
