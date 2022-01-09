@@ -31,10 +31,7 @@ public class CommentService {
     public Comment commentToArticle(Long articleId, Picker picker) throws Exception {
         checkPickerPicked(articleId, picker.getId());
 
-        Article article = articleRepository
-                .findById(articleId)
-                .orElseThrow(() -> new Exception("cannot find article"));
-        return commentRepository.save(new Comment("와! 배도라지 아시는구나!", picker, article));
+        return commentRepository.save(new Comment("와! 배도라지 아시는구나!", articleId, picker));
     }
 
     public Comment commentToComment(Long articleId, Long commentId, Picker picker) throws Exception {
@@ -43,7 +40,7 @@ public class CommentService {
         Comment comment = commentRepository
                 .findById(commentId)
                 .orElseThrow(() -> new Exception("cannot find comment"));
-        return commentRepository.save(new Comment("와! 배도라지 아시는구나!", picker, comment.getArticle(), comment));
+        return commentRepository.save(new Comment("와! 배도라지 아시는구나!", articleId, picker, comment));
     }
 
     public void checkPickerPicked(Long articleId, Long pickerId) throws Exception {

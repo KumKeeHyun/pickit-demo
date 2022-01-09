@@ -22,27 +22,23 @@ public class Comment {
 
     private String content;
 
+    private Long articleId;
+
     @ManyToOne
     @JoinColumn
     private Picker createdBy;
 
-    @ManyToOne
-    @JoinColumn
-    private Article article;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn
     private Comment parentComment;
 
-    public Comment(String content, Picker createdBy, Article article) {
-        this(content, createdBy, article, null);
+    public Comment(String content, Long articleId, Picker createdBy) {
+        this(content, articleId, createdBy, null);
     }
 
     @Builder
-    public Comment(String content, Picker createdBy, Article article, Comment parentComment) {
-        this.content = content;
-        this.createdBy = createdBy;
-        this.article = article;
-        this.parentComment = parentComment;
+    public Comment(String content, Long articleId, Picker createdBy, Comment parentComment) {
+        this(null, content, articleId, createdBy, parentComment);
     }
 }
