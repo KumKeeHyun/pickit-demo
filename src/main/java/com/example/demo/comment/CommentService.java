@@ -7,6 +7,8 @@ import com.example.demo.pick.PickId;
 import com.example.demo.pick.PickRepository;
 import com.example.demo.user.Picker;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -20,12 +22,13 @@ public class CommentService {
     private final CommentRepository commentRepository;
     private final PickRepository pickRepository;
 
-    public List<Comment> getComments(Long articleId) {
-        return commentRepository.findByArticleIdAndParentCommentIsNull(articleId);
+    public Page<CommentDto.Response> findComments(Long articleId, Pageable pageable) {
+        Page<Comment> comments = commentRepository.findByArticleIdAndParentCommentIsNull(articleId, pageable);
+        return comments.map(CommentDto.Response::of);
     }
 
-    public List<Comment> getReplyComments(Long commentId) {
-        return commentRepository.findByParentCommentId(commentId);
+    public List<CommentDto.Response> findReplyComments(Long commentId) {
+        return CommentDto.Response.ofList(commentRepository.findByParentCommentId(commentId));
     }
 
     public Comment commentToArticle(Long articleId, Picker picker) throws Exception {
@@ -43,7 +46,7 @@ public class CommentService {
         return commentRepository.save(new Comment("와! 배도라지 아시는구나!", articleId, pick.getItem().getId(), picker, comment));
     }
 
-    public Pick checkPickerPicked(Long articleId, Long pickerId) throws Exception {
+    private Pick checkPickerPicked(Long articleId, Long pickerId) throws Exception {
         return pickRepository.findById(new PickId(articleId, pickerId))
                 .orElseThrow(() -> new Exception("comment only when pick some item"));
     }

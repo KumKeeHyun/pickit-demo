@@ -3,6 +3,8 @@ package com.example.demo.comment;
 import com.example.demo.user.Picker;
 import com.example.demo.user.PickerRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,13 +21,13 @@ public class CommentController {
     private final PickerRepository pickerRepository;
 
     @GetMapping("/comment")
-    public List<CommentDto.Response> getComments(@PathVariable Long articleId) {
-        return CommentDto.Response.ofList(commentService.getComments(articleId));
+    public Page<CommentDto.Response> findComments(@PathVariable Long articleId, Pageable pageable) {
+        return commentService.findComments(articleId, pageable);
     }
 
     @GetMapping("/comment/{commentId}/reply")
-    public List<CommentDto.Response> getReplyComments(@PathVariable Long commentId) {
-        return CommentDto.Response.ofList(commentService.getReplyComments(commentId));
+    public List<CommentDto.Response> findReplyComments(@PathVariable Long commentId) {
+        return commentService.findReplyComments(commentId);
     }
 
     @GetMapping("/comment/new")
