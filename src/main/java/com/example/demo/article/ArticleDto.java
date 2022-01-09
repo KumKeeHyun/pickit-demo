@@ -8,14 +8,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class ArticleDto {
 
     @Data
     @AllArgsConstructor
     @NoArgsConstructor
-    public static class UserResponse {
+    public static class Response {
         private Long id;
         private String content;
         private PickerDto.Response createdBy;
@@ -24,8 +23,8 @@ public class ArticleDto {
         private Boolean picked;
         private Long pickedItemId;
 
-        public static UserResponse of(Article article) {
-            return new UserResponse(article.getId(),
+        public static Response of(Article article) {
+            return new Response(article.getId(),
                     article.getContent(),
                     PickerDto.Response.of(article.getCreatedBy()),
                     ItemDto.Response.ofList(article.getItems()),
@@ -33,8 +32,8 @@ public class ArticleDto {
                     null);
         }
 
-        public static UserResponse of(Article article, Pick pick) {
-            return new UserResponse(article.getId(),
+        public static Response of(Article article, Pick pick) {
+            return new Response(article.getId(),
                     article.getContent(),
                     PickerDto.Response.of(article.getCreatedBy()),
                     ItemDto.Response.ofList(article.getItems()),

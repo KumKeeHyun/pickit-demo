@@ -17,6 +17,7 @@ public class Item {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Lob()
     private String url;
 
     private String content;

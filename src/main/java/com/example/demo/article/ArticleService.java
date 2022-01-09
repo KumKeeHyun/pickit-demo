@@ -1,6 +1,5 @@
 package com.example.demo.article;
 
-import com.example.demo.comment.Comment;
 import com.example.demo.item.Item;
 import com.example.demo.item.ItemRepository;
 import com.example.demo.pick.Pick;
@@ -25,7 +24,7 @@ public class ArticleService {
     private final ItemRepository itemRepository;
     private final PickRepository pickRepository;
 
-    public Page<ArticleDto.UserResponse> findArticles(Pageable pageable, Picker picker) {
+    public Page<ArticleDto.Response> findArticles(Pageable pageable, Picker picker) {
         Page<Article> articles = articleRepository.findAll(pageable);
         List<Long> ids = articles.stream().map(Article::getId).collect(Collectors.toList());
         List<Pick> picks = pickRepository.findByArticleIdInAndPickerId(ids, picker.getId());
@@ -35,9 +34,9 @@ public class ArticleService {
                     .filter(p -> p.getArticle().getId().equals(a.getId()))
                     .findAny();
             if (pick.isPresent())
-                return ArticleDto.UserResponse.of(a, pick.get());
+                return ArticleDto.Response.of(a, pick.get());
             else
-                return ArticleDto.UserResponse.of(a);
+                return ArticleDto.Response.of(a);
         });
     }
 

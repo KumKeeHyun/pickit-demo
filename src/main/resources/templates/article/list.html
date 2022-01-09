@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Article</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>게시글 목록</h1>
+        </div>
+
+        <div class="row">
+            <div class="article-list col-9" id="article-list">
+
+            </div>
+        </div>
+        <div class="ui-button", id="next-page-button">
+            next page
+        </div>
+    </div>
+
+    <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" th:inline="javascript">
+        /*<![CDATA[*/
+        const articlesPerPageSize = 3;
+
+        function getPageId(n) { return 'article-page-' + n; }
+
+        function getArticle(data) {
+            // 글 추가
+            const article = document.createElement('div');
+            article.className = 'card';
+
+            const header = document.createElement('div');
+            header.className = 'card-header';
+            header.textContent = data.createdBy.name + '의 ' + data.id + '번째 글';
+            article.appendChild(header);
+
+            const itemSlide = document.createElement('div');
+            itemSlide.id = 'itemSlide';
+            itemSlide.className = 'carousel slide';
+            itemSlide.setAttribute('data-ride', 'carousel');
+
+            const itemInner = document.createElement('div');
+            itemInner.className = 'carousel-inner';
+            for (let i = 0; i < data.items.length; i++) {
+                const item = document.createElement('div');
+                if (i == 0) {
+                    item.className = 'carousel-item active';
+                } else {
+                    item.className = 'carousel-item';
+                }
+                const itemImg = document.createElement('img');
+                itemImg.className = 'd-block w-40'
+                itemImg.src = data.items[i].url;
+                itemImg.alt = data.items[i].content;
+                item.appendChild(itemImg);
+
+                itemInner.appendChild(item);
+            }
+            itemSlide.appendChild(itemInner);
+
+            const controlPrev = document.createElement('a');
+            controlPrev.className = 'carousel-control-prev';
+            controlPrev.href = '#itemSlide';
+            controlPrev.setAttribute('role', 'button');
+            controlPrev.setAttribute('data-slide', 'prev');
+            const prevIcon = document.createElement('span');
+            prevIcon.className = 'carousel-control-prev-icon';
+            prevIcon.ariaHidden = 'true';
+            controlPrev.appendChild(prevIcon);
+            const prevText = document.createElement('span');
+            prevText.className = 'sr-only';
+            prevText.textContent = 'Previous';
+            controlPrev.appendChild(prevText);
+            itemSlide.appendChild(controlPrev);
+
+            const controlNext = document.createElement('a');
+            controlNext.className = 'carousel-control-next';
+            controlNext.href = '#itemSlide';
+            controlNext.setAttribute('role', 'button');
+            controlNext.setAttribute('data-slide', 'next');
+            const nextIcon = document.createElement('span');
+            nextIcon.className = 'carousel-control-next-icon';
+            nextIcon.ariaHidden = 'true';
+            controlNext.appendChild(nextIcon);
+            const nextText = document.createElement('span');
+            nextText.className = 'sr-only';
+            nextText.textContent = 'next';
+            controlNext.appendChild(nextText);
+            itemSlide.appendChild(controlNext);
+
+            article.appendChild(itemSlide);
+
+            const body = document.createElement('div');
+            body.className = 'card-body';
+            const bodyContent = document.createElement('p');
+            bodyContent.className = 'card-text';
+            bodyContent.textContent = data.content;
+            body.appendChild(bodyContent);
+            article.appendChild(body);
+
+            return article;
+        }
+
+        function addPage(page) {
+            $.ajax({
+                type: 'GET',
+                url: '/pickit/api/article',
+                data: {
+                    page: page, // current Page
+                    size: articlesPerPageSize, // max page size
+                },
+                dataType: 'json',
+            }).done(function (result) {
+                if (result.length == 0) { return; } // add articleList data
+
+                for (var i = 0; i < result.length; i++) {
+                    articleList.appendChild(getArticle(result[i]))
+                }
+
+            });
+        }
+
+        const articleList = document.getElementById('article-list');
+        let page = 0; // 초기 페이지
+        addPage(page);
+
+        $('#next-page-button').click(function () {
+            addPage(++page);
+        })
+    </script>
+
+</body>
+</html>
