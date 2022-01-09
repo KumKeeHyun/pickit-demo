@@ -40,6 +40,7 @@ public class CommentService {
         Comment comment = commentRepository
                 .findById(commentId)
                 .orElseThrow(() -> new Exception("cannot find comment"));
+
         return commentRepository.save(new Comment("와! 배도라지 아시는구나!", articleId, picker, comment));
     }
 

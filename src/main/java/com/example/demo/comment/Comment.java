@@ -28,8 +28,7 @@ public class Comment {
     @JoinColumn
     private Picker createdBy;
 
-
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn
     private Comment parentComment;
 
