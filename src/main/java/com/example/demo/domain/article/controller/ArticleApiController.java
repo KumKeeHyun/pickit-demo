@@ -1,6 +1,5 @@
 package com.example.demo.domain.article.controller;
 
-import com.example.demo.domain.article.service.ArticleService;
 import com.example.demo.domain.user.Picker;
 import com.example.demo.domain.user.PickerRepository;
 import lombok.AllArgsConstructor;
@@ -21,23 +20,23 @@ import java.util.List;
 @RequestMapping("/api/article")
 public class ArticleApiController {
 
-    private final ArticleService articleService;
-    private final PickerRepository pickerRepository;
-
-    @GetMapping("")
-    public ResponseEntity<List<ArticleDto.Response>> findArticles(@PageableDefault(size = 3) Pageable pageable) {
-        Picker kim = pickerRepository.findByName("Kim").get();
-        Page<ArticleDto.Response> articles = articleService.findArticles(pageable, kim);
-
-        return ResponseEntity.ok(articles.getContent());
-    }
-
-    @GetMapping("/{articleId}/pick/{itemId}")
-    @Transactional
-    public ResponseEntity<String> pick(@PathVariable Long articleId, @PathVariable Long itemId) throws Exception {
-        Picker kim = pickerRepository.findByName("Kim").get();
-        articleService.pick(articleId, itemId, kim);
-
-        return ResponseEntity.ok("success");
-    }
+//    private final ArticleService articleService;
+//    private final PickerRepository pickerRepository;
+//
+//    @GetMapping("")
+//    public ResponseEntity<List<ArticleDto.Response>> findArticles(@PageableDefault(size = 3) Pageable pageable) {
+//        Picker kim = pickerRepository.findByName("Kim").get();
+//        Page<ArticleDto.Response> articles = articleService.findArticles(pageable, kim);
+//
+//        return ResponseEntity.ok(articles.getContent());
+//    }
+//
+//    @GetMapping("/{articleId}/pick/{itemId}")
+//    @Transactional
+//    public ResponseEntity<String> pick(@PathVariable Long articleId, @PathVariable Long itemId) throws Exception {
+//        Picker kim = pickerRepository.findByName("Kim").get();
+//        articleService.pick(articleId, itemId, kim);
+//
+//        return ResponseEntity.ok("success");
+//    }
 }

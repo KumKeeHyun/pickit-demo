@@ -1,4 +1,4 @@
-package com.example.demo.domain.article.controller;
+package com.example.demo.domain.article.controller.dto;
 
 import com.example.demo.domain.article.entity.Item;
 import lombok.AllArgsConstructor;

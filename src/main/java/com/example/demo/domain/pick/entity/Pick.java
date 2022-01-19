@@ -4,6 +4,7 @@ import com.example.demo.domain.article.entity.Article;
 import com.example.demo.domain.article.entity.Item;
 import com.example.demo.domain.user.Picker;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -21,6 +22,7 @@ public class Pick {
 
     private Long itemId;
 
+    @Builder
     public Pick(Long userId, Long articleId, Long itemId) {
         this(new PickId(userId, articleId), itemId);
     }

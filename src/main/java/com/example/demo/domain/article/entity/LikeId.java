@@ -1,4 +1,4 @@
-package com.example.demo.domain.pick.entity;
+package com.example.demo.domain.article.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,7 +12,7 @@ import java.util.Objects;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class PickId implements Serializable {
+public class LikeId implements Serializable {
 
     private Long userId;
     private Long articleId;
@@ -21,8 +21,8 @@ public class PickId implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        PickId pickId = (PickId) o;
-        return Objects.equals(userId, pickId.userId) && Objects.equals(articleId, pickId.articleId);
+        LikeId likeId = (LikeId) o;
+        return Objects.equals(userId, likeId.userId) && Objects.equals(articleId, likeId.articleId);
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.example.demo.domain.article.controller;
+package com.example.demo.domain.article.controller.dto;
 
 import com.example.demo.domain.article.entity.Article;
 import com.example.demo.domain.pick.entity.Pick;

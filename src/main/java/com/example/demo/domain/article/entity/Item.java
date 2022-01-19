@@ -17,20 +17,18 @@ public class Item {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Lob()
+    @Lob
     private String url;
 
     private String content;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn
     private Article article;
 
     @Builder
-    public Item(String url, String content, Article article) {
-        this.url = url;
-        this.content = content;
-        this.article = article;
+    public Item(String url, String content) {
+        this(null, url, content, null);
     }
 
     public void setArticle(Article article) {
