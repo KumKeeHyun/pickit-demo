@@ -1,4 +1,4 @@
-package com.example.demo.comment;
+package com.example.demo.domain.comment;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

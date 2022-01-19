@@ -1,4 +1,4 @@
-package com.example.demo.pick;
+package com.example.demo.domain.pick;
 
 import lombok.AllArgsConstructor;
 import org.springframework.context.event.EventListener;

@@ -1,7 +1,7 @@
-package com.example.demo.pick;
+package com.example.demo.domain.pick;
 
-import com.example.demo.article.Article;
-import com.example.demo.item.Item;
+import com.example.demo.domain.article.entity.Article;
+import com.example.demo.domain.article.entity.Item;
 import com.example.demo.domain.user.Picker;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,6 +1,6 @@
-package com.example.demo.item;
+package com.example.demo.domain.article.entity;
 
-import com.example.demo.article.Article;
+import com.example.demo.domain.article.entity.Article;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

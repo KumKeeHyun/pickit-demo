@@ -1,6 +1,6 @@
-package com.example.demo.item;
+package com.example.demo.domain.article.controller;
 
-import com.example.demo.item.Item;
+import com.example.demo.domain.article.entity.Item;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

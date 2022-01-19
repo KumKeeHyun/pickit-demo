@@ -1,4 +1,4 @@
-package com.example.demo.comment;
+package com.example.demo.domain.comment;
 
 import com.example.demo.domain.user.Picker;
 import lombok.AllArgsConstructor;

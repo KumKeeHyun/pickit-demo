@@ -1,5 +1,6 @@
-package com.example.demo.article;
+package com.example.demo.domain.article.controller;
 
+import com.example.demo.domain.article.service.ArticleService;
 import com.example.demo.domain.user.Picker;
 import com.example.demo.domain.user.PickerRepository;
 import lombok.AllArgsConstructor;

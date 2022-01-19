@@ -1,9 +1,12 @@
-package com.example.demo.article;
+package com.example.demo.domain.article.service;
 
-import com.example.demo.item.Item;
-import com.example.demo.item.ItemRepository;
-import com.example.demo.pick.Pick;
-import com.example.demo.pick.PickRepository;
+import com.example.demo.domain.article.controller.ArticleDto;
+import com.example.demo.domain.article.entity.Article;
+import com.example.demo.domain.article.entity.ArticleRepository;
+import com.example.demo.domain.article.entity.Item;
+import com.example.demo.domain.article.entity.ItemRepository;
+import com.example.demo.domain.pick.Pick;
+import com.example.demo.domain.pick.PickRepository;
 import com.example.demo.domain.user.Picker;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;

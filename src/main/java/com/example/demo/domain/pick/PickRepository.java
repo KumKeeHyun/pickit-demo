@@ -1,4 +1,4 @@
-package com.example.demo.pick;
+package com.example.demo.domain.pick;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
