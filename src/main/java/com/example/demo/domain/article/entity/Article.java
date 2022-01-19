@@ -1,14 +1,12 @@
 package com.example.demo.domain.article.entity;
 
 import com.example.demo.domain.pick.entity.Pick;
-import com.example.demo.domain.user.Picker;
 import com.example.demo.domain.user.entity.Auditor;
 import com.example.demo.domain.user.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.data.domain.AbstractAggregateRoot;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -30,15 +28,16 @@ public class Article extends Auditor {
     @OneToMany(mappedBy = "article", orphanRemoval = true,cascade = CascadeType.ALL)
     private List<Item> items = new ArrayList<>();
 
-    public Article(String content, User createdBy) {
-        this(content, 0L, createdBy);
+    public Article(String content, List<Item> items, User createdBy) {
+        this(content, 0L, items, createdBy);
     }
 
     @Builder
-    public Article(String content, Long likeCnt, User createdBy) {
+    public Article(String content, Long likeCnt, List<Item> items, User createdBy) {
         super(createdBy);
         this.content = content;
         this.likeCnt = likeCnt;
+        addItems(items);
     }
 
     public void addItems(List<Item> items) {

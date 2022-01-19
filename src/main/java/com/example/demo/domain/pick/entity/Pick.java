@@ -1,15 +1,11 @@
 package com.example.demo.domain.pick.entity;
 
-import com.example.demo.domain.article.entity.Article;
-import com.example.demo.domain.article.entity.Item;
-import com.example.demo.domain.user.Picker;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 @Entity
 @Getter

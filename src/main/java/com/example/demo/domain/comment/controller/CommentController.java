@@ -1,7 +1,7 @@
-package com.example.demo.domain.comment;
+package com.example.demo.domain.comment.controller;
 
-import com.example.demo.domain.user.Picker;
-import com.example.demo.domain.user.PickerRepository;
+import com.example.demo.domain.comment.CommentService;
+import com.example.demo.domain.comment.controller.dto.CommentDto;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

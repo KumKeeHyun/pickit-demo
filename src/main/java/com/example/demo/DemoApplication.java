@@ -3,8 +3,6 @@ package com.example.demo;
 import com.example.demo.domain.article.entity.Article;
 import com.example.demo.domain.article.entity.ArticleRepository;
 import com.example.demo.domain.article.entity.Item;
-import com.example.demo.domain.user.Picker;
-import com.example.demo.domain.user.PickerRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

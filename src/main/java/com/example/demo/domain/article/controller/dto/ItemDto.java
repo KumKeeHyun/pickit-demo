@@ -28,4 +28,19 @@ public class ItemDto {
             return items.stream().map(Response::of).collect(Collectors.toList());
         }
     }
+
+    @Data
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class Request {
+        private String url;
+        private String content;
+
+        public Item toEntity() {
+            return Item.builder()
+                    .url(url)
+                    .content(content)
+                    .build();
+        }
+    }
 }

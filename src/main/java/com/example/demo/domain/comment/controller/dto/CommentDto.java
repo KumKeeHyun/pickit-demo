@@ -1,10 +1,12 @@
-package com.example.demo.domain.comment;
+package com.example.demo.domain.comment.controller.dto;
 
-import com.example.demo.domain.user.PickerDto;
+import com.example.demo.domain.comment.entity.Comment;
+import com.example.demo.domain.user.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,12 +19,15 @@ public class CommentDto {
         private Long id;
         private String content;
         private Long itemId;
-        private PickerDto.Response createdBy;
+
+        private User createdBy;
+        private LocalDateTime createdDate;
+        private LocalDateTime lastModifiedDate;
 
         public static Response of(Comment comment) {
             return new Response(comment.getId(),
                     comment.getContent(),
-                    comment.getItemId(),
+                    comment.getPickedItemId(),
                     PickerDto.Response.of(comment.getCreatedBy()));
         }
 

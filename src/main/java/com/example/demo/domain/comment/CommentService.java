@@ -1,9 +1,11 @@
 package com.example.demo.domain.comment;
 
+import com.example.demo.domain.comment.controller.dto.CommentDto;
+import com.example.demo.domain.comment.entity.Comment;
+import com.example.demo.domain.comment.entity.CommentRepository;
 import com.example.demo.domain.pick.entity.Pick;
 import com.example.demo.domain.pick.entity.PickId;
 import com.example.demo.domain.pick.entity.PickRepository;
-import com.example.demo.domain.user.Picker;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
