@@ -1,4 +1,4 @@
-package com.example.demo.domain.pick;
+package com.example.demo.domain.pick.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

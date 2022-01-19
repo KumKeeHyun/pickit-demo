@@ -1,4 +1,4 @@
-package com.example.demo.domain.pick;
+package com.example.demo.domain.pick.entity;
 
 import com.example.demo.domain.article.entity.Article;
 import com.example.demo.domain.article.entity.Item;
@@ -14,21 +14,15 @@ import java.io.Serializable;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@IdClass(PickId.class)
-public class Pick implements Serializable {
+public class Pick {
 
-    @Id
-    @ManyToOne
-    @JoinColumn(name = "article_id")
-    private Article article;
+    @EmbeddedId
+    private PickId pickId;
 
-    @Id
-    @ManyToOne
-    @JoinColumn(name = "picker_id")
-    private Picker picker;
+    private Long itemId;
 
-    @ManyToOne
-    @JoinColumn
-    private Item item;
+    public Pick(Long userId, Long articleId, Long itemId) {
+        this(new PickId(userId, articleId), itemId);
+    }
 
 }

@@ -1,8 +1,8 @@
 package com.example.demo.domain.comment;
 
-import com.example.demo.domain.pick.Pick;
-import com.example.demo.domain.pick.PickId;
-import com.example.demo.domain.pick.PickRepository;
+import com.example.demo.domain.pick.entity.Pick;
+import com.example.demo.domain.pick.entity.PickId;
+import com.example.demo.domain.pick.entity.PickRepository;
 import com.example.demo.domain.user.Picker;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
