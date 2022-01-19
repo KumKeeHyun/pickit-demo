@@ -1,6 +1,6 @@
 package com.example.demo.comment;
 
-import com.example.demo.user.Picker;
+import com.example.demo.domain.user.Picker;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

@@ -1,4 +1,4 @@
-package com.example.demo.user;
+package com.example.demo.domain.user.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -6,22 +6,24 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 @Entity
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Picker {
+public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(unique = true)
     private String name;
 
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
     @Builder
-    public Picker(String name) {
-        this.name = name;
+    public User(String name, Role role) {
+        this(null, name, role);
     }
 }

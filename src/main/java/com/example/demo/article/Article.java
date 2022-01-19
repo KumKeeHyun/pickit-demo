@@ -2,7 +2,7 @@ package com.example.demo.article;
 
 import com.example.demo.item.Item;
 import com.example.demo.pick.PickEvent;
-import com.example.demo.user.Picker;
+import com.example.demo.domain.user.Picker;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

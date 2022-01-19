@@ -1,7 +1,7 @@
 package com.example.demo.article;
 
-import com.example.demo.user.Picker;
-import com.example.demo.user.PickerRepository;
+import com.example.demo.domain.user.Picker;
+import com.example.demo.domain.user.PickerRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

@@ -1,11 +1,9 @@
 package com.example.demo.comment;
 
-import com.example.demo.article.Article;
-import com.example.demo.article.ArticleRepository;
 import com.example.demo.pick.Pick;
 import com.example.demo.pick.PickId;
 import com.example.demo.pick.PickRepository;
-import com.example.demo.user.Picker;
+import com.example.demo.domain.user.Picker;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
