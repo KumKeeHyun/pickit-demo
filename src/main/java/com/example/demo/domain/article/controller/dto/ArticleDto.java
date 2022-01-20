@@ -3,7 +3,6 @@ package com.example.demo.domain.article.controller.dto;
 import com.example.demo.domain.article.entity.Article;
 import com.example.demo.domain.article.entity.ArticleWithPick;
 import com.example.demo.domain.article.entity.Item;
-import com.example.demo.domain.pick.entity.Pick;
 import com.example.demo.domain.user.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
