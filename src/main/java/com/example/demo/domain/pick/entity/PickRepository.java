@@ -9,6 +9,4 @@ import java.util.List;
 
 @Repository
 public interface PickRepository extends JpaRepository<Pick, PickId> {
-
-    List<Pick> findByArticleIdInAndPickerId(List<Long> articleIds, Long pickerId);
 }

@@ -16,7 +16,7 @@ import java.util.List;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/article/{articleId}")
-public class CommentController {
+public class CommentApiController {
 
     private final CommentService commentService;
 
@@ -47,7 +47,7 @@ public class CommentController {
         return ResponseEntity.ok(CommentDto.Response.of(comment));
     }
 
-    @GetMapping("/comment/{commentId}/reply")
+    @PostMapping("/comment/{commentId}/reply")
     public ResponseEntity<CommentDto.Response> comment(@AuthenticationPrincipal User user,
                                                 @PathVariable Long articleId,
                                                 @PathVariable Long commentId,

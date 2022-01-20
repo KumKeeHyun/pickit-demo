@@ -24,7 +24,7 @@ public class CommentService {
     private final PickRepository pickRepository;
 
     public Page<Comment> findComments(Long articleId, Pageable pageable) {
-        return commentRepository.findByArticleIdAndParentCommentIsNull(articleId, pageable);
+        return commentRepository.findByArticleIdAndParentCommentIdIsNull(articleId, pageable);
     }
 
     public List<Comment> findReplyComments(Long articleId, Long commentId) {

@@ -15,7 +15,7 @@ import java.util.Optional;
 public interface ArticleRepository extends JpaRepository<Article, Long> {
 
     @Query("SELECT " +
-            "com.example.demo.domain.article.entity.ArticleWithPick(a, p.itemId) " +
+            "new com.example.demo.domain.article.entity.ArticleWithPick(a, p.itemId) " +
             "FROM Article a LEFT OUTER JOIN Pick p ON a.id = p.pickId.articleId " +
             "WHERE a.id IN :articleIds " +
             "AND (p IS NULL OR p.pickId.userId = :userId)")
@@ -23,7 +23,7 @@ public interface ArticleRepository extends JpaRepository<Article, Long> {
                                                            @Param("userId") Long userId);
 
     @Query("SELECT " +
-            "com.example.demo.domain.article.entity.ArticleWithPick(a, p.itemId) " +
+            "new com.example.demo.domain.article.entity.ArticleWithPick(a, p.itemId) " +
             "FROM Article a LEFT OUTER JOIN Pick p ON a.id = p.pickId.articleId " +
             "WHERE a.id = :articleId " +
             "AND (p IS NULL OR p.pickId.userId = :userId)")
@@ -32,9 +32,9 @@ public interface ArticleRepository extends JpaRepository<Article, Long> {
 
     @Modifying
     @Query("UPDATE Article a " +
-            "SET a.likeCnt = (" +
+            "SET a.likeCnt = ( " +
                 "SELECT COUNT(*) " +
-                "FROM Like l" +
+                "FROM Like l " +
                 "WHERE l.likeId.articleId = a.id" +
             ")")
     void batchUpdateLikeCnt();
