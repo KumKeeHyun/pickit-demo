@@ -1,14 +1,15 @@
 package com.example.demo.domain.comment.controller;
 
-import com.example.demo.domain.comment.CommentService;
 import com.example.demo.domain.comment.controller.dto.CommentDto;
+import com.example.demo.domain.comment.entity.Comment;
+import com.example.demo.domain.comment.service.CommentService;
+import com.example.demo.domain.user.entity.User;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -18,28 +19,42 @@ import java.util.List;
 public class CommentController {
 
     private final CommentService commentService;
-    private final PickerRepository pickerRepository;
 
     @GetMapping("/comment")
-    public Page<CommentDto.Response> findComments(@PathVariable Long articleId, Pageable pageable) {
-        return commentService.findComments(articleId, pageable);
+    public ResponseEntity<Page<CommentDto.Response>> findComments(@PathVariable Long articleId,
+                                                                  Pageable pageable) {
+        Page<Comment> comments = commentService.findComments(articleId, pageable);
+        Page<CommentDto.Response> commentResponses = comments.map(CommentDto.Response::of);
+
+        return ResponseEntity.ok(commentResponses);
     }
 
     @GetMapping("/comment/{commentId}/reply")
-    public List<CommentDto.Response> findReplyComments(@PathVariable Long commentId) {
-        return commentService.findReplyComments(commentId);
+    public ResponseEntity<List<CommentDto.Response>> findReplies(@PathVariable Long articleId,
+                                                                 @PathVariable Long commentId) {
+        List<Comment> comments = commentService.findReplyComments(articleId, commentId);
+        List<CommentDto.Response> commentResponses = CommentDto.Response.ofList(comments);
+
+        return ResponseEntity.ok(commentResponses);
     }
 
-    @GetMapping("/comment/new")
-    public CommentDto.Response commentToArticle(@PathVariable Long articleId) throws Exception {
-        Picker kim = pickerRepository.findByName("Kim").get();
-        return CommentDto.Response.of(commentService.commentToArticle(articleId, kim));
+    @PostMapping("/comment")
+    public ResponseEntity<CommentDto.Response> commentToArticle(@AuthenticationPrincipal User user,
+                                                @PathVariable Long articleId,
+                                                @RequestBody CommentDto.Request commentRequest) throws Exception {
+        Comment comment = commentService.comment(user, articleId, commentRequest);
+
+        return ResponseEntity.ok(CommentDto.Response.of(comment));
     }
 
-    @GetMapping("/comment/{commentId}/reply/new")
-    public CommentDto.Response commentToComment(@PathVariable Long articleId, @PathVariable Long commentId) throws Exception {
-        Picker kim = pickerRepository.findByName("Kim").get();
-        return CommentDto.Response.of(commentService.commentToComment(articleId, commentId, kim));
+    @GetMapping("/comment/{commentId}/reply")
+    public ResponseEntity<CommentDto.Response> commentToComment(@AuthenticationPrincipal User user,
+                                                @PathVariable Long articleId,
+                                                @PathVariable Long commentId,
+                                                @RequestBody CommentDto.Request commentRequest) throws Exception {
+        Comment comment = commentService.comment(user, articleId, commentId, commentRequest);
+
+        return ResponseEntity.ok(CommentDto.Response.of(comment));
     }
 
 }

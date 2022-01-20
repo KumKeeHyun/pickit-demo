@@ -27,8 +27,11 @@ public class Comment extends Auditor {
 
     private Long parentCommentId;
 
-    public Comment(User createdBy, String content, Long articleId, Long pickedItemId) {
-        this(createdBy, content, pickedItemId, articleId, null);
+    public Comment(String content, Long articleId, Long pickedItemId) {
+        this(content, articleId, pickedItemId, null);
+    }
+    public Comment(String content, Long articleId, Long pickedItemId, Long parentCommentId) {
+        this((User) null, content, articleId, pickedItemId, parentCommentId);
     }
 
     @Builder
