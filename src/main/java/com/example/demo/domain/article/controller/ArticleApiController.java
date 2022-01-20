@@ -74,4 +74,11 @@ public class ArticleApiController {
 
         return ResponseEntity.ok(null);
     }
+
+    @PutMapping("/batch-update-like-count")
+    public ResponseEntity<?> batchUpdateLikeCnt() {
+        likeArticleService.batchUpdateLikeCnt();
+
+        return ResponseEntity.ok(null);
+    }
 }
