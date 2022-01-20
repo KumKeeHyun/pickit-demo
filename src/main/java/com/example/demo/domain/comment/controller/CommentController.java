@@ -39,7 +39,7 @@ public class CommentController {
     }
 
     @PostMapping("/comment")
-    public ResponseEntity<CommentDto.Response> commentToArticle(@AuthenticationPrincipal User user,
+    public ResponseEntity<CommentDto.Response> comment(@AuthenticationPrincipal User user,
                                                 @PathVariable Long articleId,
                                                 @RequestBody CommentDto.Request commentRequest) throws Exception {
         Comment comment = commentService.comment(user, articleId, commentRequest);
@@ -48,7 +48,7 @@ public class CommentController {
     }
 
     @GetMapping("/comment/{commentId}/reply")
-    public ResponseEntity<CommentDto.Response> commentToComment(@AuthenticationPrincipal User user,
+    public ResponseEntity<CommentDto.Response> comment(@AuthenticationPrincipal User user,
                                                 @PathVariable Long articleId,
                                                 @PathVariable Long commentId,
                                                 @RequestBody CommentDto.Request commentRequest) throws Exception {

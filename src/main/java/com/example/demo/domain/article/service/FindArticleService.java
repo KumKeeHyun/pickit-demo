@@ -20,7 +20,7 @@ public class FindArticleService {
     private final ArticleRepository articleRepository;
     private final PaginateArticle paginateArticle;
 
-    public Page<ArticleWithPick> findArticles(Pageable pageable, User user) {
+    public Page<ArticleWithPick> findArticles(User user, Pageable pageable) {
         Page<Long> paginatedArticleIds = paginateArticle.getPaginatedArticleIds(pageable);
         List<Long> articleIds = paginatedArticleIds.getContent();
         List<ArticleWithPick> articles = articleRepository.findArticleWithPickByArticleIdIn(articleIds, user.getId());
@@ -30,7 +30,7 @@ public class FindArticleService {
                 paginatedArticleIds.getTotalElements());
     }
 
-    public ArticleWithPick findArticle(Long articleId, User user) throws Exception {
+    public ArticleWithPick findArticle(User user, Long articleId) throws Exception {
         return articleRepository.findArticleWithPickById(articleId, user.getId())
                 .orElseThrow(() -> new Exception("cannot find article: " + articleId));
     }

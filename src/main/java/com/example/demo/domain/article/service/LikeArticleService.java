@@ -18,11 +18,11 @@ public class LikeArticleService {
     private final ArticleRepository articleRepository;
     private final LikeRepository likeRepository;
 
-    public void like(Long articleId, User user) {
+    public void like(User user, Long articleId) {
         likeRepository.save(new Like(user.getId(), articleId));
     }
 
-    public void unlike(Long articleId, User user) {
+    public void unlike(User user, Long articleId) {
         likeRepository.deleteById(new LikeId(user.getId(), articleId));
     }
 

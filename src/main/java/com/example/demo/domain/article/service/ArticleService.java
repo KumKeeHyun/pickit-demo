@@ -25,7 +25,7 @@ public class ArticleService {
         return articleRepository.save(article);
     }
 
-    public void pickItem(Long articleId, Long itemId, User user) throws Exception {
+    public void pickItem(User user, Long articleId, Long itemId) throws Exception {
         Article article = articleRepository.findById(articleId)
                 .orElseThrow(() -> new Exception("cannot find article: " + articleId));
 
