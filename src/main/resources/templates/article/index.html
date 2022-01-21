@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>PIKIT</title>
+
+    <link rel="stylesheet" th:href="@{/css/layout.css}" type="text/css" />
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" type="text/css" />
+</head>
+<body>
+<header>
+    <div class="logo">
+        <h1><a th:href="@{/}"><img th:src="@{/img/logo3.png}" alt="" /></a></h1>
+    </div>
+</header>
+<th:block th:each="articleWithPick : ${articlesWithPick}">
+    <div class="main_wrap clearfix">
+        <div class="profile clearfix">
+            <div class="profile_img"></div>
+            <span th:text="${articleWithPick.article.createdBy.name}">Park Kwanbin</span>
+            <p th:text="${articleWithPick.article.createdDate}">2020년 11월 14일</p>
+        </div>
+        <div class="share">
+            <h2><a th:href="@{/}"><img th:src="@{/img/share_icon.png}" alt="" /></a></h2>
+        </div>
+
+        <div class="main">
+            <div th:id="'carousel-items-' + ${articleWithPick.article.id}" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <th:block th:each="item : ${articleWithPick.article.items}">
+                        <li th:data-target="'#carousel-items-' + ${articleWithPick.article.id}" th:data-slide-to="${itemStat.index}" th:classappend="${itemStat.index} == 0 ? active"></li>
+                    </th:block>
+                </ol>
+                <div class="carousel-inner">
+                    <th:block th:each="item : ${articleWithPick.article.items}">
+                        <div class="carousel-item" th:classappend="${itemStat.index} == 0 ? active">
+                            <img class="d-block w-100" th:src="${item.url}" alt="">
+                        </div>
+                    </th:block>
+                </div>
+                <a class="carousel-control-prev" th:href="'#carousel-items-' + ${articleWithPick.article.id}" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" th:href="'#carousel-items-' + ${articleWithPick.article.id}" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+            <div class="locate">
+                <button><img th:src="@{/img/check.png}" alt="" /></button>
+                <p>4 / 16</p>
+            </div>
+
+            <div class="main_text">
+                <div class="title">
+                    <a th:href="@{/}">
+                        <h3 th:text="${articleWithPick.article.content}">정자동 카페 최고의 감성로고는?</h3>
+                    </a>
+                </div>
+                <div class="description">
+                    <p th:text="${articleWithPick.article.content}">우리가 더 나은 세상을 만들기 위해 고민하면서 앞으로도 우리는 아름다움에서 고민을 시작하고, 답을 찾을 것입니다.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</th:block>
+
+<footer>
+    <ul class="clearfix">
+        <li>
+            <h5><a th:href="@{/}"><img th:src="@{/img/home.png}" alt="" /></a></h5>
+        </li>
+        <li>
+            <h5><a th:href="@{/}"><img th:src="@{/img/plus.png}" alt="" /></a></h5>
+        </li>
+        <li>
+            <h5><a th:href="@{/}"><img th:src="@{/img/bell.png}" alt="" /></a></h5>
+        </li>
+        <li>
+            <h5><a th:href="@{/}"><img th:src="@{/img/user.png}" alt="" /></a></h5>
+        </li>
+    </ul>
+</footer>
+<script th:src="@{/js/jquery.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+</body>
+</html>

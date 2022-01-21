@@ -1,0 +1,181 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font-family: 'Noto Sans KR', sans-serif;
+    vertical-align: baseline;
+}
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+body {
+    line-height: 1;
+}
+ol, ul {
+    list-style: none;
+}
+blockquote, q {
+    quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+a{
+    text-decoration:none;
+}
+.clearfix{
+    content:"";
+    display:block;
+    clear:both;
+}
+header{
+    width:100%;
+    padding:1.6% 0%;
+    border-bottom: 1px solid #ddd;
+    .logo{
+        width:28%;
+        margin:0 auto;
+        padding-top:1.2%;
+        text-align:center;
+        img{
+            width:100%;
+        }
+    }
+}
+.main_wrap{
+    width:100%;
+    .profile{
+        width:94%;
+        margin-top:2.4%;
+        margin-left:2%;
+        .profile_img{
+            width:2rem;
+            height:2rem;
+            background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTR7zNqFnpUvQe_TmWWuCPWXFA9LB8cSotg9g&usqp=CAU");
+            background-size: 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+            border-radius:100%;
+            float:left;
+            margin-right:2%;
+        }
+        span{
+            font-size:1em;
+            font-weight:700;
+            color:#4A4A4A;
+        }
+        p{
+            font-size:0.6em;
+            margin-top:1.2%;
+            color:#93928E;
+        }
+    }
+    .share{
+        width:6%;
+        margin-top:4.4%;
+        margin-left:-2.8%;
+    }
+    .profile, .share{
+        float:left;
+    }
+    .main{
+        width:100%;
+        ul{
+            padding-top:1.6%;
+            width:100%;
+            li{
+                img{
+                    width:100%;
+                }
+            }
+        }
+        .locate{
+            width:100%;
+            button{
+                width:2.2rem;
+                height:2.2rem;
+                border:none;
+                border-radius:100%;
+                background-color:#E8D4D7;
+                display:block;
+                margin:0 auto;
+                margin-top:-4%;
+                z-index:3;
+                &:hover{
+                    background-color:#3B6292;
+                }
+            }
+            p{
+                font-size:0.7rem;
+                font-weight:700;
+                color:#000;
+                margin-top:2%;
+                text-align:center;
+            }
+        }
+        .main_text{
+            margin-left:2%;
+            margin-right:2%;
+            .title{
+                h3{
+                    font-size:1.3rem;
+                    font-weight:700;
+                    color:#111111;
+                    margin-top:4.8%;
+                }
+            }
+            .description{
+                p{
+                    font-size:0.72rem;
+                    font-weight:500;
+                    line-height:160%;
+                    color:#A1A3A2;
+                    margin-top:2%;
+                }
+            }
+        }
+    }
+}
+
+footer{
+    width:100%;
+    padding:3.4% 0%;
+    position:fixed;
+    bottom:0;
+    border-top: 1px solid #ddd;
+    ul{
+        width:100%;
+        li{
+            float:left;
+            margin-left:20%;
+            &:nth-child(1){
+                margin-left:12%;
+            }
+            img{
+                width:100%;
+            }
+        }
+    }
+}

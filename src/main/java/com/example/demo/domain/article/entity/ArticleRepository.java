@@ -16,7 +16,8 @@ public interface ArticleRepository extends JpaRepository<Article, Long> {
 
     @Query("SELECT " +
             "new com.example.demo.domain.article.entity.ArticleWithPick(a, p.itemId) " +
-            "FROM Article a LEFT OUTER JOIN Pick p ON a.id = p.pickId.articleId " +
+            "FROM Article a LEFT JOIN a.items " +
+            "LEFT OUTER JOIN Pick p ON a.id = p.pickId.articleId " +
             "WHERE a.id IN :articleIds " +
             "AND (p IS NULL OR p.pickId.userId = :userId)")
     List<ArticleWithPick> findArticleWithPickByArticleIdIn(@Param("articleIds") List<Long> articleIds,
@@ -24,7 +25,8 @@ public interface ArticleRepository extends JpaRepository<Article, Long> {
 
     @Query("SELECT " +
             "new com.example.demo.domain.article.entity.ArticleWithPick(a, p.itemId) " +
-            "FROM Article a LEFT OUTER JOIN Pick p ON a.id = p.pickId.articleId " +
+            "FROM Article a LEFT JOIN a.items " +
+            "LEFT OUTER JOIN Pick p ON a.id = p.pickId.articleId " +
             "WHERE a.id = :articleId " +
             "AND (p IS NULL OR p.pickId.userId = :userId)")
     Optional<ArticleWithPick> findArticleWithPickById(@Param("articleId") Long articleId,
