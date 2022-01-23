@@ -2,6 +2,7 @@ package com.example.demo.config;
 
 import com.example.demo.security.AuthFilter;
 import com.example.demo.security.AuthProvider;
+import com.example.demo.security.AuthSuccessHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -22,6 +23,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private AuthFilter authFilter() throws Exception {
         AuthFilter filter = new AuthFilter(new AntPathRequestMatcher("/login", "GET"));
         filter.setAuthenticationManager(super.authenticationManager());
+        filter.setAuthenticationSuccessHandler(new AuthSuccessHandler());
 
         return filter;
     }

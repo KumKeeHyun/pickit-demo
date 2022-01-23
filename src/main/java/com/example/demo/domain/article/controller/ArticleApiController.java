@@ -15,6 +15,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
+
 @RestController
 @AllArgsConstructor
 @RequestMapping("/api/article")
@@ -46,8 +48,8 @@ public class ArticleApiController {
         Article article = articleService.createArticle(articleRequest.toEntity());
 
         return ResponseEntity
-                // .created("...")
-                .ok(ArticleDto.Response.of(article));
+                .created(linkTo(methodOn(ArticleApiController.class).findArticle(null, article.getId())).toUri())
+                .body(ArticleDto.Response.of(article));
     }
 
     @PutMapping("/{articleId}/pick/{itemId}")
