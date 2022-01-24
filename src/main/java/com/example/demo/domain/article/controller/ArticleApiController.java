@@ -3,6 +3,7 @@ package com.example.demo.domain.article.controller;
 import com.example.demo.domain.article.controller.dto.ArticleDto;
 import com.example.demo.domain.article.entity.Article;
 import com.example.demo.domain.article.entity.ArticleWithPick;
+import com.example.demo.domain.article.service.ArticlePickStat;
 import com.example.demo.domain.article.service.ArticleService;
 import com.example.demo.domain.article.service.FindArticleService;
 import com.example.demo.domain.article.service.LikeArticleService;
@@ -59,6 +60,14 @@ public class ArticleApiController {
         articleService.pickItem(user, articleId, itemId);
 
         return ResponseEntity.ok(null);
+    }
+
+    @GetMapping("/{articleId}/pick/stat")
+    public ResponseEntity<ArticlePickStat> findArticlePickStatistics(@AuthenticationPrincipal User user,
+                                                                     @PathVariable Long articleId) throws Exception {
+        ArticlePickStat articlePickStat = articleService.findArticlePickStatistics(user, articleId);
+
+        return ResponseEntity.ok(articlePickStat);
     }
 
     @PutMapping("/{articleId}/like")
