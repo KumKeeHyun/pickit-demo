@@ -1,5 +1,6 @@
 package com.example.demo.domain.article.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -19,6 +20,9 @@ public class Item {
     @Lob
     private String url;
 
+    @Enumerated(EnumType.STRING)
+    private ItemType itemType;
+
     private String content;
 
     @ManyToOne
@@ -26,11 +30,18 @@ public class Item {
     private Article article;
 
     @Builder
-    public Item(String url, String content) {
-        this(null, url, content, null);
+    public Item(String url, ItemType itemType, String content) {
+        this(null, url, itemType, content, null);
     }
 
     public void setArticle(Article article) {
         this.article = article;
+    }
+
+    public enum ItemType {
+        @JsonProperty("image")
+        IMAGE,
+        @JsonProperty("youtube")
+        YOUTUBE;
     }
 }

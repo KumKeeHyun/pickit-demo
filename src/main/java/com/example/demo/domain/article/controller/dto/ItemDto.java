@@ -16,11 +16,13 @@ public class ItemDto {
     public static class Response {
         private Long id;
         private String url;
+        private Item.ItemType itemType;
         private String content;
 
         public static Response of(Item item) {
             return new Response(item.getId(),
                     item.getUrl(),
+                    item.getItemType(),
                     item.getContent());
         }
 
@@ -34,11 +36,13 @@ public class ItemDto {
     @NoArgsConstructor
     public static class Request {
         private String url;
+        private Item.ItemType itemType;
         private String content;
 
         public Item toEntity() {
             return Item.builder()
                     .url(url)
+                    .itemType(itemType)
                     .content(content)
                     .build();
         }
