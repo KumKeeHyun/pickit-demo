@@ -38,7 +38,7 @@ public class DemoApplication implements CommandLineRunner {
                 new User("Choi", Role.ADMIN));
         userRepository.saveAll(users);
 
-        IntStream.range(0, 1).forEach(i -> {
+        IntStream.range(1, 4).forEach(i -> {
             User createdBy = users.get(0);
             List<Item> items = Arrays.asList(
                     new Item("http://talkimg.imbc.com/TVianUpload/tvian/TViews/image/2020/08/07/fd4ac9e6-a67f-4b54-83d5-547cc5f83457.png", Item.ItemType.IMAGE, "침착맨"),
